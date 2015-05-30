@@ -24,11 +24,13 @@ unsigned char get(FILE * inp)
 		if (io_by_value)
 		{
 			fscanf(inp, " %i", &c);
+			fflush(inp);
 		}
 
 		else
 		{
-			fscanf(inp, " %c", (unsigned char *) &c);
+			fscanf(inp, "%c", (unsigned char *) &c);
+			fflush(inp);
 		}
 	}
 
@@ -60,8 +62,6 @@ void put(FILE * outp, unsigned char c)
 			io_count = 0;
 			fprintf(outp, "\n");
 		}
-
-		fflush(outp);
 	}
 
 	else
