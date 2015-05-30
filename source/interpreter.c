@@ -81,7 +81,8 @@ int interpreter(const char const * code)
 		i++;
 	}
 
-	printf("\n");
+	//print a fresh newline
+	//printf("\n");
 
 	return 0;
 }

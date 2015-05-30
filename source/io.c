@@ -112,7 +112,7 @@ int cli()
 	{
 		quit--;
 
-		printf("# ");
+		printf("\n# ");
 		fgets(code,30000,stdin);
 		
 		if (code[0] == 'q') quit = 0;
