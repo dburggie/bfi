@@ -102,6 +102,8 @@ char * readFile(const char const * filename)
 
 int cli()
 {
+	printf("(\'q\' to quit)\n");
+
 	int quit = 100;
 
 	char code[30000] = { 0 };

@@ -15,8 +15,10 @@ all: ${BLD} ${OBJ} ${EXE}
 clean:
 	rm -f ${EXE} ${OBJ}
 
-install: ${INSTALLDIR} ${EXE}
-	cp ${EXE} ${INSTALLDIR}/
+install: ${INSTALLDIR}/${EXE}
+
+${INSTALLDIR}/${EXE}: ${INSTALLDIR} ${EXE}
+	cp ${EXE} ${INSTALLDIR}/${EXE}
 
 ${BLD}:
 	mkdir -p ${BLD}
