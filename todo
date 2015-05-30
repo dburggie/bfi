@@ -1,0 +1,37 @@
+
+Stuff I'd like:
+	interactive mode
+	buffered input mode
+
+
+Interactive Mode:
+	get it using the -i command line switch
+	will display a prompt instead of reading from a file
+	Will immediately execute your entered code
+
+# ++++++++[>++++[>+>+<<-]>+>+>+<<<<-]>>.>+.>++.
+Hi
+<ok>
+# 
+
+	Should look something like that
+
+Buffered input:
+	use the -b command line switch
+	use `scanf("%c", &c)` instead of `c = getc(stdin)` for keyboard input
+	will echo typed characters
+
+Read int-values instead of key-values:
+	-n
+	buffered input only
+	keyboard input echoes to screen.
+	The ',' command will use `scanf(" %i", &c)` instead of `scanf(" %c", &c)`
+
+use it like:
+$ bfi -i
+$ bfi -ib
+$ bfi -in
+$ bfi -b source.bf
+$ bfi -n source.bf
+
+
