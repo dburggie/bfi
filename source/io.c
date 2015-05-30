@@ -4,8 +4,8 @@
 #include <io.h>
 
 int interactive_mode = 0;
-int buffered_input = 0;
-int io_by_value = 0;
+int input_by_value = 0;
+int output_by_value = 0;
 
 
 unsigned char get(FILE * inp)
@@ -13,25 +13,24 @@ unsigned char get(FILE * inp)
 	static int closed = 0;
 	
 	int c = 0;
+	int err = 0;
 
 	if (closed)
 	{
 		return 0x00;
 	}
 
-	if (buffered_input)
+	if (input_by_value)
 	{
-		if (io_by_value)
+		while (0 == (err = fscanf(inp," %i", &c)))
 		{
-			fscanf(inp, " %i", &c);
-			fflush(inp);
-		}
-
-		else
-		{
-			fscanf(inp, "%c", (unsigned char *) &c);
-			fflush(inp);
-		}
+			if (EOF == err) 
+			{
+				closed = 1;
+				c = 0;
+				break;
+			}
+		}				
 	}
 
 	else
@@ -44,7 +43,7 @@ unsigned char get(FILE * inp)
 		closed = 1;
 	}
 
-	return c & 0x00;
+	return c & 0xff;
 }
 
 
@@ -52,7 +51,7 @@ void put(FILE * outp, unsigned char c)
 {
 	static int io_count = 0;
 
-	if (io_by_value)
+	if (output_by_value)
 	{
 		io_count++;
 		fprintf(outp, "%i ", c);
@@ -66,7 +65,7 @@ void put(FILE * outp, unsigned char c)
 
 	else
 	{
-		putc(c, outp);
+		fprintf(outp,"%c",c);
 	}
 }
 
@@ -112,7 +111,7 @@ int cli()
 		quit--;
 
 		printf("# ");
-		scanf("%s", code);
+		fgets(code,30000,stdin);
 		
 		if (code[0] == 'q') quit = 0;
 		else
