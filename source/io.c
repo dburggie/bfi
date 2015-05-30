@@ -54,7 +54,7 @@ void put(FILE * outp, unsigned char c)
 	if (output_by_value)
 	{
 		io_count++;
-		fprintf(outp, "%i ", c);
+		fprintf(outp, "%3.i ", c);
 		
 		if (io_count == 8)
 		{
