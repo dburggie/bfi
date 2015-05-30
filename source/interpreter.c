@@ -1,9 +1,12 @@
+#include <stdio.h>
 #include <interpreter.h>
 #include <io.h>
 
+#define BUFSIZE 30000
+
 int interpreter(const char const * code)
 {
-	unsigned char buf[30000] = { 0 };
+	unsigned char buf[BUFSIZE] = { 0 };
 	int i = 0, p = 0;
 
 	int loop;
@@ -14,7 +17,7 @@ int interpreter(const char const * code)
 		{
 			case '>':
 				p++;
-				if (p == 30000) return 1;
+				if (p == BUFSIZE) return 1;
 				break;
 
 			case '<':
@@ -31,11 +34,11 @@ int interpreter(const char const * code)
 				break;
 
 			case ',':
-				buf[p] = get();
+				buf[p] = get(stdin);
 				break;
 
 			case '.': 
-				put(buf[p]);
+				put(stdout,buf[p]);
 				break;
 
 			case '[':

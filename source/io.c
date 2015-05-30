@@ -1,29 +1,29 @@
 #include <stdio.h>
-
 #include <io.h>
 
-
-unsigned char get()
+unsigned char get(FILE * inp)
 {
 	static int closed = 0;
 
-	unsigned char c = 0x00;
+	int c = 0;
 
 	if (closed)
 	{
 		return 0x00;
 	}
 
-	if (EOF == fscanf(stdin, "%c", &c))
+	c = getc(inp);
+
+	if (EOF == c)
 	{
 		closed = 1;
 	}
 
-	return c;
+	return c & 0x00;
 }
 
-void put(unsigned char c)
+void put(FILE * outp, unsigned char c)
 {
-	fprintf(stdout, "%c", c);
-	fflush(stdout);
+	fprintf(outp, "%c", c);
+	fflush(outp);
 }

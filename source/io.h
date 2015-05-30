@@ -1,2 +1,4 @@
-unsigned char get();
-void put(unsigned char c);
+#include <stdio.h>
+
+unsigned char get(FILE * inp);
+void put(FILE * outp, unsigned char c);
