@@ -1,0 +1,63 @@
+bfi - a brainfuck interpreter
+
+Compile and Install:
+
+	bfi uses make to compile and install. By default, it installs to ~/bin/,
+	I know that's not exactly standard practice, but I like to add it to my
+	PATH and put my project executables there. Feel free to change the 
+	INSTALLDIR variable inside of the makefile.
+
+Use:
+	brainfuck takes a filename as a command-line argument. It reads this file,
+	and runs the contents as though it were brainfuck source code. It stops
+	reading when it encounters a byte with value zero.
+
+	$ bfi brainfuck_source_code.bf
+
+About brainfuck:
+	
+	Brainfuck is a programming language with a very small vocabulary. While
+	executing, there's an instruction buffer and a data buffer with pointers
+	to our working position within both streams. The interpreter reads each 
+	character in turn from the instruction buffer and, if it's a valid command,
+	modifies the program state accordingly.
+
+	Brainfuck's vocabulary consists of 8 one-character commands as follow:
+
+		> : shift the data pointer right
+		< : shift the data pointer left
+		+ : increment the byte at the data pointer
+		- : decrement the byte at the data pointer
+		, : read one byte of input, store it at the data pointer
+		. : write one byte of output from the data pointer
+		[ : if data byte is 0, skip to the corresponding ']'
+		] : if data byte is non-zero, return to the corresponding '['
+	
+	Note that all bytes in the data buffer start with value 0.
+
+	Brainfuck is has no syntactic sugar at all. You don't have access to data
+	literals of any kind. If you want to set a byte to a certain value, you'll
+	have to achieve that solely with increments or decrements (and, possibly,
+	clever use of looping). It can be a lot of fun though.
+
+Some cool brainfuck code:
+
+	Double a byte:
+	[>++<-]>[-<+>]<
+	
+	Copy a byte:
+	[>+>+<<-]>>[-<<+>>]<<
+	
+	Move to the next byte with value 0xff:
+	+[->+]-
+
+	Move to the next byte with value 0x01:
+	-[+>-]+
+
+	Move to the next byte with value 0x00:
+	[>]
+
+	If-then-else:
+	>[-]+<[[-]>+> THEN CODE HERE <<]>-[[-]> ELSE CODE HERE <]<
+	
+Have some fun!
