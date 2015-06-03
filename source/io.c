@@ -10,12 +10,11 @@ int output_by_value = 0;
 
 unsigned char get(FILE * inp)
 {
-	static int closed = 0;
-	
+
 	int c = 0;
 	int err = 0;
 
-	if (closed)
+	if (feof(inp))
 	{
 		return 0x00;
 	}
@@ -26,7 +25,6 @@ unsigned char get(FILE * inp)
 		{
 			if (EOF == err) 
 			{
-				closed = 1;
 				c = 0;
 				break;
 			}
@@ -36,11 +34,6 @@ unsigned char get(FILE * inp)
 	else
 	{
 		c = getc(inp);
-	}
-
-	if (EOF == c)
-	{
-		closed = 1;
 	}
 
 	return c & 0xff;
@@ -55,6 +48,11 @@ void put(FILE * outp, unsigned char c)
 	{
 		io_count++;
 		fprintf(outp, "%3.i ", c);
+
+		if ('\n' == c)
+		{
+			io_count = 0;
+		}
 		
 		if (io_count == 8)
 		{

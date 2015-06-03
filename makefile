@@ -17,6 +17,9 @@ clean:
 
 install: ${INSTALLDIR}/${EXE}
 
+uninstall:
+	rm -f ${INSTALLDIR}/${EXE}
+
 ${INSTALLDIR}/${EXE}: ${INSTALLDIR} ${EXE}
 	cp ${EXE} ${INSTALLDIR}/${EXE}
 
