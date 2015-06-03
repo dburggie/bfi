@@ -1,4 +1,5 @@
 
+INSTALLDIR = ~/bin
 
 INC = -Isource
 COPT = -Wall
@@ -8,19 +9,19 @@ OBJ = build/interpreter.o build/io.o build/main.o
 
 EXE = bfi
 BLD = build
-INSTALLDIR = ~/bin
+INX = ${INSTALLDIR}/${EXE}
 
 all: ${BLD} ${OBJ} ${EXE}
 
 clean:
 	rm -f ${EXE} ${OBJ}
 
-install: ${INSTALLDIR}/${EXE}
+install: ${INX}
 
 uninstall:
 	rm -f ${INSTALLDIR}/${EXE}
 
-${INSTALLDIR}/${EXE}: ${INSTALLDIR} ${EXE}
+${INX}: ${INSTALLDIR} ${EXE}
 	cp ${EXE} ${INSTALLDIR}/${EXE}
 
 ${BLD}:
